@@ -1,15 +1,16 @@
-import api from "./helpers/wp_api.js"
-import {ajax} from "./helpers/ajax.js"
-import {Title} from "./components/Title.js"
-import {Header} from "./components/Header.js"
-import {Loader} from "./components/Loader.js"
 
+import { Header } from "./components/Header.js"
+import { Loader } from "./components/Loader.js"
+import { Main } from "./components/Main.js"
+import { Router } from "./components/Router.js"
 
-export function App (){
-const d = document,
-$root = d.getElementById("root")
+export function App() {
+  const $root = document.getElementById("root")
 
-$root.append(Header())
-$root.append(Loader())
+  $root.innerHTML = null
+  $root.append(Header())
+  $root.append(Main())
+  $root.append(Loader())
 
+  Router()
 }

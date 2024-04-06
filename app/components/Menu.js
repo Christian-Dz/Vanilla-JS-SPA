@@ -6,6 +6,7 @@ export function Menu(){
     `
     <a href="#/">Menu</a>
     <a href="#/search">Search</a>
+    <a href="#/contact">Contact</a>
     `
     return $menu
 }
