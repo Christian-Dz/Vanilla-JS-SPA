@@ -1,8 +1,7 @@
 
 
-
 export function Post(props){
-    let { content, date, title } = props[0]
+    let { content, date, title } = props[0]                     //why [0]
     let dateFormat = new Date(date).toLocaleString()
 
     const $section = document.createElement("section")
@@ -15,8 +14,8 @@ export function Post(props){
    <time datetime="${date}">${dateFormat}</time>
    </aside>
    <hr>
+   <hr>
    <article>${content.rendered}</article>
     `
     return $section
-
 }
