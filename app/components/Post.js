@@ -1,7 +1,7 @@
 
 
 export function Post(props){
-    let { content, date, title } = props[0]                     //why [0]
+    let { content, date, title } = props[0]                     
     let dateFormat = new Date(date).toLocaleString()
 
     const $section = document.createElement("section")

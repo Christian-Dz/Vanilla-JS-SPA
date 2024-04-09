@@ -3,11 +3,11 @@ import { ajax } from "../helpers/ajax.js"
 import { PostCard } from "./PostCard.js"
 import { Post } from "./Post.js"
 import { Header } from "./Header.js"
+import { SearchCard } from "./SearchCard.js"
 
 
 export async function Router(){
   const d = document
-  const w = window
   const $main = d.getElementById("main")
   let {hash} = location
 
@@ -26,7 +26,12 @@ export async function Router(){
       }
     }) 
 
-  } else if (hash.includes("#/search")){
+  } 
+  
+  
+  
+  
+  else if (hash.includes("#/search")){
 
     const $newHeader = Header(true)
     const $existingHeader = document.querySelector("header")
@@ -35,13 +40,30 @@ export async function Router(){
     }
 
     let query = localStorage.getItem("wpSearch")
-    d.querySelector(".loader").style.display = "none"
-    if (!query) return false
+
+    if (!query) {
+      d.querySelector(".loader").style.display = "none"
+      return false
+    }
 
     await ajax ({
       url: `${api.SEARCH}${query}`,
       cbSuccess: (search) => {
-      console.log(search)  
+        console.log(search)
+      
+        if (search.length === 0){
+          let $html = document.createElement("p")
+          $html.innerHTML =
+          `
+          NO MATCHES WERE FOUND OF <mark>${query}</mark>
+          `
+          $main.append($html)
+
+        } else {
+          const fragment = d.createDocumentFragment();
+          search.forEach(post => fragment.append(SearchCard(post)));
+          $main.append(fragment)
+        }
       }
     })
 
